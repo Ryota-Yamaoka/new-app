@@ -13,6 +13,8 @@ const pool = new Pool({
     rejectUnauthorized: false
   }
 });
+const PORT = process.env.PORT || 5000;
+console.log("port", PORT);
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
@@ -34,6 +36,7 @@ app.get('/db', async (req, res) => {
       res.send("Error " + err);
     }
   })
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -297,10 +300,4 @@ app.get("/relation-know", (req, res) => {
 
 app.get("/sns-know", (req, res) => {
   res.render("sns-know.ejs");
-});
-
-// app.listen(3000);
-
-http.listen((process.env.PORT || 3000), function(){
-  console.log('listening on *:3000');
 });
