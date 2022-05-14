@@ -271,4 +271,8 @@ app.get("/sns-know", (req, res) => {
   res.render("sns-know.ejs");
 });
 
-app.listen(3000);
+// app.listen(3000);
+
+http.listen((process.env.PORT || 3000), function(){
+  console.log('listening on *:3000');
+});
