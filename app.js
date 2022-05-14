@@ -18,7 +18,7 @@ console.log("port", PORT);
 
 express()
   .use(express.static(path.join(__dirname, 'public')))
-  .use(express.urlencoded({extended: false}));
+  // .use(express.urlencoded({extended: false}));
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/cool', (req, res) => res.send(cool()))
