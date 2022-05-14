@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const mysql = require('mysql2');
+const mysql = require('mysql');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const path = require('path');
@@ -23,7 +23,6 @@ express()
   .get('/', (req, res) => res.render('pages/index'))
   .get('/cool', (req, res) => res.send(cool()))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-  .get('/times', (req, res) => res.send(showTimes()));
   .get('/db', async (req, res) => {
     try {
       const client = await pool.connect();
@@ -300,12 +299,3 @@ app.get("/relation-know", (req, res) => {
 app.get("/sns-know", (req, res) => {
   res.render("sns-know.ejs");
 });
-
-showTimes = () => {
-  let result = '';
-  const times = process.env.TIMES || 5;
-  for (i = 0; i < times; i++) {
-    result += i + ' ';
-  }
-  return result;
-}
