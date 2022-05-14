@@ -3,6 +3,7 @@ const app = express();
 const mysql = require('mysql2');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const ejs = require("ejs");
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
