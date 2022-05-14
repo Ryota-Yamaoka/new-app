@@ -16,13 +16,15 @@ const pool = new Pool({
 const PORT = process.env.PORT || 5000;
 console.log("port", PORT);
 
-app.use(express.static(__dirname + '/public'));
-app.use(express.urlencoded({extended: false}));
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
-app.get('/cool', (req, res) => res.send(cool()));
-app.get('/times', (req, res) => res.send(showTimes()));
-app.get('/db', async (req, res) => {
+express()
+  .use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', (req, res) => res.render('pages/index'))
+  .get('/cool', (req, res) => res.send(cool()))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  .get('/times', (req, res) => res.send(showTimes()));
+  .get('/db', async (req, res) => {
     try {
       const client = await pool.connect();
       const result = await client.query('SELECT * FROM test_table');
@@ -34,7 +36,6 @@ app.get('/db', async (req, res) => {
       res.send("Error " + err);
     }
   })
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 const connection = mysql.createConnection({
   host: 'localhost',
@@ -299,3 +300,12 @@ app.get("/relation-know", (req, res) => {
 app.get("/sns-know", (req, res) => {
   res.render("sns-know.ejs");
 });
+
+showTimes = () => {
+  let result = '';
+  const times = process.env.TIMES || 5;
+  for (i = 0; i < times; i++) {
+    result += i + ' ';
+  }
+  return result;
+}
