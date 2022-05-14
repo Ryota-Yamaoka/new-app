@@ -16,8 +16,6 @@ const pool = new Pool({
 const PORT = process.env.PORT || 5000;
 console.log("port", PORT);
 
-app.use(express.static('public'));
-app.use(express.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/public'));
 app.use(express.urlencoded({extended: false}));
 app.set('views', path.join(__dirname, 'views'));
