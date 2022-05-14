@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>poster-model-select</title>
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  </head>
+  <body>
+    <%- include("header"); %>
+    <div class="action-wrapper">
+      <div class="model-select">
+        <form action="poster-input-image" method="get">
+          <div class="background-wrap contribute-background head-caption">
+            <h1>「感創」を鑑賞して、考える。</h1>
+            <div class="heading">
+              <h2>これらは、他の人が何らかの体験を「感創」したものです。</h2>
+            </div>
+            <div id="find-different">
+              <h1>違う価値観を探してみよう。</h1>
+            </div>
+            <div class="heading">
+              <h2>※感じ方は違って当たり前です。</h2>
+            </div>
+          </div>
+          <div class="container">
+            <div class="know-contents">
+              <div class="see-action btn">
+                <a href="/human-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/friends--v4.png"/>
+                  <p>人間</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="/school-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/classroom.png">
+                  <p>学校</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="book-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/literature.png"/>
+                  <p>本</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="movie-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/documentary.png"/>
+                  <p>映画</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="/music-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/music.png"/>
+                  <p>音楽</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="/tech-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/iphone.png"/>
+                  <p>テクノロジー</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="/japan-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/japan.png"/>
+                  <p>日本</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="nature-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/lake.png"/>
+                  <p>自然</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="policy-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/elections.png"/>
+                  <p>政治</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="love-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/like.png"/>
+                  <p>愛</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="global-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/geography.png"/>
+                  <p>グローバル</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="dream-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/partly-cloudy-night.png"/>
+                  <p>夢</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="sei-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/friends--v2.png"/>
+                  <p>性</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="battle-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/explosion.png"/>
+                  <p>戦争</p>
+                </a>
+              </div>
+              <div class="see-action btn">
+                <a href="culture-know" class="see-action-icon">
+                  <img src="https://img.icons8.com/bubbles/500/000000/daruma-doll.png"/>
+                  <p>文化</p>
+                </a>
+              </div>
+            </div>
+            <div class="see-memo">
+              <h1>創作メモ</h1>
+              <p>作品をつくる上でのコンセプト・参考にする表現方法などをメモしておこう</p>
+              <textarea name="name" class="m-form-textarea"></textarea>
+            </div>
+          </div>
+        </form>
+        <a href = "/" class="back">戻る</a>
+      </div>
+    </div>
+    <script>
+    // モーダルウィンドウを開く
+    $('.js-modal-open').on('click', function(){
+      var target = $(this).data('target');
+      var modal = document.getElementById(target);
+      scrollPosition = $(window).scrollTop();
+
+      $('body').addClass('fixed').css({'top': -scrollPosition});
+      $(modal).fadeIn();
+      return false;
+    });
+
+    // モーダルウィンドウを閉じる
+    $('.js-modal-close').on('click', function(){
+      $('body').removeClass('fixed');
+      window.scrollTo( 0 , scrollPosition );
+      $('.js-modal').fadeOut();
+      return false;
+    });
+  </script>
+  </body>
+</html>
