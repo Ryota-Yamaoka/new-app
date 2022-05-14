@@ -36,10 +36,6 @@ express()
   //   }
   // })
 
-// Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const analytics = getAnalytics(app);
-
 const connection = mysql.createConnection({
   host: 'localhost',
   user: 'root',
@@ -154,7 +150,7 @@ app.post("/signup",
  );
 
 app.get("/login", (req, res) => {
-  res.render("login.ejs");
+  res.render("login 2.ejs");
 });
 
 app.post('/login', (req, res) => {
@@ -304,6 +300,6 @@ app.get("/sns-know", (req, res) => {
   res.render("sns-know.ejs");
 });
 
-app.get("/success", (req, res) => {
-  res.render("success.html");
-});
+// app.get("/success", (req, res) => {
+//   res.render("success.html");
+// });
