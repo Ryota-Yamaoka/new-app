@@ -3,10 +3,37 @@ const app = express();
 const mysql = require('mysql2');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
+const path = require('path');
 const ejs = require("ejs");
+const cool = require('cool-ascii-faces');
+const { Pool } = require('pg');
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false
+  }
+});
 
 app.use(express.static('public'));
 app.use(express.urlencoded({extended: false}));
+app.use(express.static(__dirname + '/public'));
+app.use(express.urlencoded({extended: false}));
+app.set('views', path.join(__dirname, 'views'));
+app.set('view engine', 'ejs');
+app.get('/cool', (req, res) => res.send(cool()));
+app.get('/times', (req, res) => res.send(showTimes()));
+app.get('/db', async (req, res) => {
+    try {
+      const client = await pool.connect();
+      const result = await client.query('SELECT * FROM test_table');
+      const results = { 'results': (result) ? result.rows : null};
+      res.render('pages/db', results );
+      client.release();
+    } catch (err) {
+      console.error(err);
+      res.send("Error " + err);
+    }
+  })
 
 const connection = mysql.createConnection({
   host: 'localhost',
