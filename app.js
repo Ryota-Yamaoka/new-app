@@ -299,7 +299,3 @@ app.get("/relation-know", (req, res) => {
 app.get("/sns-know", (req, res) => {
   res.render("sns-know.ejs");
 });
-
-// app.get("/success", (req, res) => {
-//   res.render("success.html");
-// });
