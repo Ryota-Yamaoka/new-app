@@ -299,3 +299,51 @@ app.get("/relation-know", (req, res) => {
 app.get("/sns-know", (req, res) => {
   res.render("sns-know.ejs");
 });
+
+app.get("/japanese-know", (req, res) => {
+  res.render("japanese-know.ejs");
+});
+
+app.get("/english-know", (req, res) => {
+  res.render("english-know.ejs");
+});
+
+app.get("/society-know", (req, res) => {
+  res.render("society-know.ejs");
+});
+
+app.get("/math-know", (req, res) => {
+  res.render("math-know.ejs");
+});
+
+app.get("/science-know", (req, res) => {
+  res.render("science-know.ejs");
+});
+
+app.get("/all-know", (req, res) => {
+  res.render("all-know.ejs");
+});
+
+app.get("/moral-know", (req, res) => {
+  res.render("moral-know.ejs");
+});
+
+app.get("/info-know", (req, res) => {
+  res.render("info.ejs");
+});
+
+app.get("/helth-know", (req, res) => {
+  res.render("helth-know.ejs");
+});
+
+app.get("/pe-know", (req, res) => {
+  res.render("pe-know.ejs");
+});
+
+app.get("/merosu-know", (req, res) => {
+  res.render("merosu-know.ejs");
+});
+
+app.get("/sangetsuki-know", (req, res) => {
+  res.render("sangetsuki-know.ejs");
+});
