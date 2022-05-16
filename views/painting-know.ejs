@@ -24,6 +24,9 @@
             </div>
           </div>
           <div class="container">
+            <div class="see-memo">
+              <h1>体験一覧</h1>
+            </div>
             <div class="know-contents">
               <div class="see-action btn">
                 <a href="/human-know" class="see-action-icon">
@@ -119,7 +122,30 @@
             <div class="see-memo">
               <h1>創作メモ</h1>
               <p>作品をつくる上でのコンセプト・参考にする表現方法などをメモしておこう</p>
-              <textarea name="name" class="m-form-textarea"></textarea>
+              <textarea name="name" class="m-form-textarea" placeholder="例 走れメロスの信実について・絵で表現・学校での友達とのじゃれあいのシーンで表現"></textarea>
+            </div>
+            <div class="">
+              <a href="#" class="js-modal-open" data-target="modal01"><p>体験の追加リクエスト</p></a>
+            </div>
+            <div id="modal01" class="modal js-modal">
+              <div class="modal-bg js-modal-close">
+              </div>
+              <div class="modal-contents">
+                <div class="modal-header">
+                　　<h1>体験（テーマ）の追加</h1>
+              　　　<span class="js-modal-close cross">×</span>
+                　</div>
+                  <div class="modal-body">
+                    <div class="lisence">
+                      <h3>当てはまる体験がない時は、追加をリクエストしてみよう。</h3>
+                      <p>例を参考に入力してみよう。</p>
+                      <div>
+	                       <input type="text" id="bms_send_message" placeholder="例 レストランでの食事">
+                         <div id="bms_send_btn">送信</div>
+                      </div>
+                    </div>
+                　</div>
+              </div>
             </div>
           </div>
         </form>
