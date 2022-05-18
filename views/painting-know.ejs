@@ -26,6 +26,11 @@
           <div class="container">
             <div class="see-memo">
               <h1>体験一覧</h1>
+              <p>タグ検索</p>
+              <div class="textoverlay-wrapper" style="margin: 0px; padding: 0px; overflow: hidden; display: block; position: relative;">
+                <div class="textoverlay" style="position: absolute; color: transparent; white-space: pre-wrap; word-wrap: break-word; overflow: hidden; margin: 0px; padding: 6px 12px; font-family: sans-serif; font-weight: 400; font-size: 14px; background-color: rgb(255, 255, 255); top: 1px; right: 1px; bottom: 1px; left: 1px;"><span style="background-color: #D9EAFE"></span> <span style="background-color: #D9EAFE"></span></div>
+                <input type="text" autocomplete="off" class="form-control" name="draft_item[tag_notation]" placeholder="作品のテーマに関するタグをスペース区切りで5つまで入力" tabindex="2" value="" style="background: transparent; position: relative; outline: 0px;">
+              </div>
             </div>
             <div class="know-contents">
               <div class="see-action btn">
@@ -95,9 +100,9 @@
                 </a>
               </div>
               <div class="see-action btn">
-                <a href="dream-know" class="see-action-icon">
+                <a href="corona-know" class="see-action-icon">
                   <img src="https://img.icons8.com/bubbles/500/000000/partly-cloudy-night.png"/>
-                  <p>夢</p>
+                  <p>コロナウイルス</p>
                 </a>
               </div>
               <div class="see-action btn">
@@ -170,6 +175,19 @@
       window.scrollTo( 0 , scrollPosition );
       $('.js-modal').fadeOut();
       return false;
+    });
+  </script>
+  <script type="text/javascript">
+      $(".tag-input").on("keydown", function(e){
+
+      //スペースかエンターをおせばタグ作成
+      if(e.keyCode == 13 || e.keyCode == 32 || e.keyCode == 229){
+        var $text = this.value
+        var $prev_txt = $("." + $type + "-tag-value").text()
+        $("input[data-type=" + $type + "]").before(add_tag($text, $type))
+        $("." + $type + "-tag-value").text($prev_txt + " " + $text)
+        this.value = ""
+        }
     });
   </script>
   </body>

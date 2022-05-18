@@ -264,8 +264,8 @@ app.get("/global-know", (req, res) => {
   res.render("global-know.ejs");
 });
 
-app.get("/dream-know", (req, res) => {
-  res.render("dream-know.ejs");
+app.get("/corona-know", (req, res) => {
+  res.render("corona-know.ejs");
 });
 
 app.get("/sei-know", (req, res) => {
