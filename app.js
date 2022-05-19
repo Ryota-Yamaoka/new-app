@@ -276,8 +276,8 @@ app.get("/battle-know", (req, res) => {
   res.render("battle-know.ejs");
 });
 
-app.get("/culture-know", (req, res) => {
-  res.render("culture-know.ejs");
+app.get("/event-know", (req, res) => {
+  res.render("event-know.ejs");
 });
 
 app.get("/now-know", (req, res) => {
@@ -346,4 +346,8 @@ app.get("/merosu-know", (req, res) => {
 
 app.get("/sangetsuki-know", (req, res) => {
   res.render("sangetsuki-know.ejs");
+});
+
+app.get("/friend-know", (req, res) => {
+  res.render("friend-know.ejs");
 });

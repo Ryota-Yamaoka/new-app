@@ -586,12 +586,12 @@ input[type="radio"]{
 
 .see-action-icon{
   position: relative;
-  left: 90px;
+
 }
 
 .see-action-icon p{
   position: relative;
-  right: 15px;
+  left: 78px;
   width: 130px;
   color: rgba(255, 255, 255, 0.9);
   background-color: rgba(174, 56, 70, 0.9);
@@ -601,7 +601,6 @@ input[type="radio"]{
 .see-action img{
   width: 200px;
   position: relative;
-  right: 90px;
 }
 
 #find-different{
