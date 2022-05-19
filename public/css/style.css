@@ -409,7 +409,8 @@ input[type="radio"]{
 .FileBtn {
     border: 3px solid rgba(174, 56, 70, 0.9);
     display: inline-block;
-    padding: 2px 1em;
+    padding: 0 1em;
+    margin-bottom: 20px;
     position: relative;
     color: white;
     background-color: rgba(174, 56, 70, 0.7);
@@ -613,6 +614,10 @@ input[type="radio"]{
   margin: 20px 0 60px 0;
   color: rgba(0, 0, 0, 0.8);
   font-size: 20px;
+}
+
+.now-up{
+  margin-bottom: 110px;
 }
 /* ------------------------------------------言語化プロセス------------------------------------------------ */
 .m-form-textarea {
