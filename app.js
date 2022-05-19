@@ -351,3 +351,11 @@ app.get("/sangetsuki-know", (req, res) => {
 app.get("/friend-know", (req, res) => {
   res.render("friend-know.ejs");
 });
+
+app.get("/ukuraina-know", (req, res) => {
+  res.render("ukuraina-know.ejs");
+});
+
+app.get("/rossia-know", (req, res) => {
+  res.render("rossia-know.ejs");
+});
