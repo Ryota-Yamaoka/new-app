@@ -46,36 +46,7 @@
                         </div>
                         <div>
                           <th>体験（テーマ）</th><br>
-                          <label>
-                            <input type="checkbox" name="" value="">人間
-                          </label>
-                          <label>
-                            <input type="checkbox" name="" value="">学校
-                          </label>
-                          <label>
-                            <input type="checkbox" name="" value="">本
-                          </label>
-                          <label>
-                            <input type="checkbox" name="" value="">映画
-                          </label>
-                          <label>
-                            <input type="checkbox" name="" value="">音楽
-                          </label>
-                          <label>
-                            <input type="checkbox" name="" value="">テクノロジー
-                          </label>
-                          <label>
-                            <input type="checkbox" name="" value="">日本
-                          </label>
-                          <label>
-                            <input type="checkbox" name="" value="">自然
-                          </label>
-                          <label>
-                            <input type="checkbox" name="" value="">政治
-                          </label>
-                          <label>
-                            <input type="checkbox" name="" value="">愛
-                          </label><br>
+                          <%- include("accordion"); %><br>
                         </div>
                         <p>作品タイトル（任意）</p>
                         <div>
@@ -92,6 +63,11 @@
                         <p>何ポイントで他の人にこの作品をコレクションしてもらいますか？</p>
                         <div>
   	                      <input type="number" id="bms_send_message" placeholder="例 150p">
+                        </div>
+                        <div>
+                          <label>
+                            <input type="checkbox" name="" value="">匿名でアップロードする。
+                          </label>
                         </div>
                         <div id="bms_send_btn">決定</div>
                       </div>
