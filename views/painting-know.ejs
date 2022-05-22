@@ -42,8 +42,9 @@
                         <h3>体験（テーマ）を選択して、君の作品を見てもらおう。</h3>
                         <div class="FileBtn">
                           <p class="btn">ファイルを選択</p>
-                          <input type="file" id = "input">
+                          <input type="file" id="input">
                         </div>
+                        <img id="img" width="200px">
                         <div>
                           <th>体験（テーマ）</th><br>
                           <%- include("accordion"); %><br>
@@ -69,7 +70,7 @@
                             <input type="checkbox" name="" value="">匿名でアップロードする。
                           </label>
                         </div>
-                        <div id="bms_send_btn">決定</div>
+                        <button id="bms_send_btn">決定</button>
                       </div>
                   　</div>
                 </div>
@@ -80,98 +81,7 @@
                 <input type="text" autocomplete="off" class="form-control" name="draft_item[tag_notation]" placeholder="作品のテーマに関するタグをスペース区切りで5つまで入力" tabindex="2" value="" style="background: transparent; position: relative; outline: 0px;">
               </div>
             </div>
-            <div class="know-contents">
-              <div class="see-action btn">
-                <a href="/human-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/friends--v4.png"/>
-                  <p>人間</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="/school-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/classroom.png">
-                  <p>学校</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="book-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/literature.png"/>
-                  <p>本</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="movie-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/documentary.png"/>
-                  <p>映画</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="/music-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/music.png"/>
-                  <p>音楽</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="/tech-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/iphone.png"/>
-                  <p>テクノロジー</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="/japan-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/japan.png"/>
-                  <p>日本</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="nature-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/lake.png"/>
-                  <p>自然</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="policy-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/elections.png"/>
-                  <p>政治</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="love-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/like.png"/>
-                  <p>愛</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="global-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/geography.png"/>
-                  <p>グローバル</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="corona-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/partly-cloudy-night.png"/>
-                  <p>コロナウイルス</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="sei-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/friends--v2.png"/>
-                  <p>性</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="battle-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/explosion.png"/>
-                  <p>戦争</p>
-                </a>
-              </div>
-              <div class="see-action btn">
-                <a href="event-know" class="see-action-icon">
-                  <img src="https://img.icons8.com/bubbles/500/000000/daruma-doll.png"/>
-                  <p>イベント</p>
-                </a>
-              </div>
-            </div>
+            <%- include("all-theme"); %>
             <div class="see-memo">
               <h1>創作メモ</h1>
               <p>作品をつくる上でのコンセプト・参考にする表現方法などをメモしておこう</p>
@@ -194,7 +104,7 @@
                       <p>例を参考に入力してみよう。</p>
                       <div>
 	                       <input type="text" id="bms_send_message" placeholder="例 レストランでの食事">
-                         <div id="bms_send_btn">送信</div>
+                         <button id="bms_send_btn">送信</button>
                       </div>
                     </div>
                 　</div>
@@ -237,6 +147,30 @@
         this.value = ""
         }
     });
+  </script>
+  <script type="text/javascript">
+    document.querySelector('#input').addEventListener('change', (event) => {
+      const file = event.target.files[0]
+      // fileがundefinedの時にreader.readAsDataURL(file)がエラーになるため、
+      // !fileがfalseの場合にreturnする。
+      if (!file) return
+      const reader = new FileReader()
+      reader.onload = (event) => {
+        document.querySelector('#img').src = event.target.result
+      }
+      reader.readAsDataURL(file)
+    })
+  </script>
+  <script type="text/javascript">
+    let ok = document.getElementById("bms_send_btn");
+    $("button").click(function(){
+      // 全てのチェック済みvalue値を取得する
+      $("input:ckecked").each(function(){
+        var r = $(this).val();
+
+        console.log(r);
+      })
+    })
   </script>
   </body>
 </html>
