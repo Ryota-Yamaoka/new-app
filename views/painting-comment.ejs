@@ -7,6 +7,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script type="text/javascript" src="https://unpkg.com/vis-network/standalone/umd/vis-network.min.js"></script>
     <script type="text/javascript" src="simplest_example.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
   </head>
   <body onload="draw()">
     <%- include("header"); %>
@@ -23,6 +24,8 @@
                 <div id="mynetwork"></div>
               </div>
             </div>
+            <canvas id="myDoughnutChart" width="40" height="10">
+            </canvas>
             <!-- テキストボックス、送信ボタン④ -->
             <div id="bms_send">
               <textarea id="bms_send_message"></textarea>
@@ -33,6 +36,32 @@
       </div>
         <a href = "/painting-know" class="back">戻る</a>
     </div>
+    <script>
+      var ctx = document.getElementById("myDoughnutChart");
+      var myDoughnutChart= new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ["ほっこりする", "優しい感じがする", "思いやりに溢れている", "感動的な表現が得意そうだ", "家族を持つということの大変さを感じた"], //データ項目のラベル
+          datasets: [{
+              backgroundColor: [
+                  "#c97586",
+                  "#bbbcde",
+                  "#93b881",
+                  "#e6b422", 
+                  "#a4a267"
+              ],
+              data: [45, 25, 13, 12, 5] //グラフのデータ
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            //グラフタイトル
+            text: '感性傾向分析'
+          }
+        }
+      });
+    </script>
     <script type="text/javascript">
     function draw() {
 

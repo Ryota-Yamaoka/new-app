@@ -18,13 +18,11 @@
 
         .content {
             margin: 150px 0 0 0;
-            color: #fff;
-            background-color: rgba(174, 56, 70, 0.9);
-            border-radius: 5%
+            color: black;
         }
 
         #prof-name{
-          color: #fff;
+          color: black;
         }
 
         .heading-lv1 {
@@ -96,6 +94,7 @@
         }
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.bundle.js"></script>
   </head>
   <body class="wrap">
     <%- include("header"); %>
@@ -117,8 +116,8 @@
               <h3 class="heading-lv3 heading-margin text-center">自己紹介</h3>
               <p class="text text-center">好きなアーティストは女王蜂です。<br>ヒトに寄り添える曲、その他作品を作りたいです。<br>ぜひ鑑賞してください！</p>
               <p>利用可能ポイント：500p</p>
-              <p>寄付履歴：ao へ 1300p</p>
-              <p>　　　　　　 moeki へ 400p</p>
+              <canvas id="myDoughnutChart" width="40" height="10">
+              </canvas>
           </div>
           <form class="" action="poster-input-image" method="get">
             <div class="square_contents">
@@ -368,6 +367,32 @@
         </div>
       </div>
     </div>
+    <script>
+      var ctx = document.getElementById("myDoughnutChart");
+      var myDoughnutChart= new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          labels: ["繊細", "感情的", "独創的", "些細な発見", "本質的"], //データ項目のラベル
+          datasets: [{
+              backgroundColor: [
+                  "#c97586",
+                  "#bbbcde",
+                  "#93b881",
+                  "#e6b422", 
+                  "#a4a267"
+              ],
+              data: [45, 25, 13, 12, 5] //グラフのデータ
+          }]
+        },
+        options: {
+          title: {
+            display: true,
+            //グラフタイトル
+            text: '感性傾向分析'
+          }
+        }
+      });
+    </script>
     <script>
     // モーダルウィンドウを開く
     $('.js-modal-open').on('click', function(){
