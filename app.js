@@ -6,50 +6,30 @@ const bcrypt = require('bcrypt');
 const path = require('path');
 const ejs = require("ejs");
 const cool = require('cool-ascii-faces');
-// const { Pool } = require('pg');
-// const pool = new Pool({
-//   connectionString: process.env.DATABASE_URL,
-//   ssl: {
-//     rejectUnauthorized: false
-//   }
-// });
+require("dotenv").config();
+const bodyParser = require("body-parser");
+const firebaseConfig = {
+  apiKey: "AIzaSyAxetUkclvXWGL9ZvYKoGfnxWbtAmYcHg0",
+  authDomain: "t0cre8.firebaseapp.com",
+  projectId: "t0cre8",
+  storageBucket: "t0cre8.appspot.com",
+  messagingSenderId: "1027348099985",
+  appId: "1:1027348099985:web:9e5a0eda2c76776e89a030",
+  measurementId: "G-LCWJQD8GEF",
+};
 const PORT = process.env.PORT || 5000;
 console.log("port", PORT);
 
 app
   .use(express.static(path.join(__dirname, 'public')))
+  .use(express.static("public"))
+  .use(express.urlencoded({ extended: false }))
+  .use(bodyParser.json())
   .set('views', path.join(__dirname, 'views'))
   .set('view engine', 'ejs')
   .get('/', (req, res) => res.render('top'))
   .get('/cool', (req, res) => res.send(cool()))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
-  // .get('/db', async (req, res) => {
-  //   try {
-  //     const client = await pool.connect();
-  //     const result = await client.query('SELECT * FROM test_table');
-  //     const results = { 'results': (result) ? result.rows : null};
-  //     res.render('pages/db', results );
-  //     client.release();
-  //   } catch (err) {
-  //     console.error(err);
-  //     res.send("Error " + err);
-  //   }
-  // })
-
-const connection = mysql.createConnection({
-  host: 'localhost',
-  user: 'root',
-  password: 'yama20020420',
-  database: 'tocre'
-});
-
-connection.connect((err) => {
-  if (err) {
-    console.log('error connecting: ' + err.stack);
-    return;
-  }
-  console.log('success');
-});
 
 app.use(
   session({
@@ -60,17 +40,15 @@ app.use(
 )
 
 app.use((req, res, next) => {
-  if(req.session.userId === undefined){
-    console.log("ログインしていません");
-    res.locals.username = "ゲスト";
-    res.locals.isLoggedIn = false;
-  }else{
-    console.log("ログインしています");
+  if (req.session.isLoggedIn) {
     res.locals.username = req.session.username;
     res.locals.isLoggedIn = true;
+  } else {
+    res.locals.username = "ゲスト";
+    res.locals.isLoggedIn = false;
   }
   next();
-})
+});
 
 app.get('/', (req, res) => {
   res.render('top.ejs');
@@ -80,108 +58,27 @@ app.get("/create-select", (req, res) => {
   res.render("create-select.ejs");
 });
 
-app.get("/signup", (req, res) => {
-  res.render("signup.ejs", {errors:[]});
-});
-
-app.post("/signup",
-
- (req, res, next) => {
-   console.log("入力値の空チェック");
-
-   const username = req.body.username;
-   const email = req.body.email;
-   const password = req.body.password;
-
-   const errors = [];
-
-   if(username === ""){
-     errors.push("ユーザー名が空です");
-   }
-   if(email === ""){
-     errors.push("メールアドレスが空です");
-   }
-   if(password === ""){
-     errors.push("パスワードが空です");
-   }
-
-   console.log(errors);
-
-   if(errors.length > 0){
-     res.render("signup.ejs", {errors:errors});
-   }else{
-     next();
-   }
- },
- (req, res, next) => {
-   console.log("メールアドレスの重複チェック");
-   const email = req.body.email;
-   const errors = [];
-   connection.query(
-      'SELECT * FROM users WHERE email = ?',
-      [email],
-      (error, results) => {
-        if (results.length > 0) {
-          errors.push("ユーザー登録に失敗しました");
-          res.render("signup.ejs", {errors:errors});
-        } else {
-          next();
-        }
-      }
-    );
- },
- (req, res) => {
-   console.log('ユーザー登録');
-     const username = req.body.username;
-     const email = req.body.email;
-     const password = req.body.password;
-     bcrypt.hash(password, 10, (error, hash) => {
-       connection.query(
-       'INSERT INTO users (username, email, password) VALUES (?, ?, ?)',
-       [username, email, hash],
-       (error, results) => {
-         req.session.userId = results.insertId;
-         req.session.username = username;
-         res.redirect('/');
-       }
-     );
-     })
-   }
- );
-
 app.get("/login", (req, res) => {
-  res.render("login 2.ejs");
+  res.locals.apiKey = firebaseConfig.apiKey;
+  res.locals.authDomain = firebaseConfig.authDomain;
+  res.locals.projectId = firebaseConfig.projectId;
+  res.locals.storageBucket = firebaseConfig.storageBucket;
+  res.locals.messagingSenderId = firebaseConfig.messagingSenderId;
+  res.locals.appId = firebaseConfig.appId;
+  res.locals.measurementId = firebaseConfig.measurementId;
+  res.render("login 3.ejs");
 });
 
-app.post('/login', (req, res) => {
-  const email = req.body.email;
-  connection.query(
-    'SELECT * FROM users WHERE email = ?',
-    [email],
-    (error, results) => {
-      if (results.length > 0) {
-        const plain = req.body.password;
-        const hash = results[0].password;
-        bcrypt.compare(plain, hash, (error, isEqual) => {
-          if(isEqual){
-            req.session.userId = results[0].id;
-            req.session.username = results[0].username;
-            res.redirect('/');
-          }else{
-            res.redirect("/login");
-          }
-        })
-      } else {
-        res.redirect('/login');
-      }
-    }
-  );
+app.post("/login", async (req, res) => {
+  req.session.username = req.body.name;
+  req.session.isLoggedIn = true;
+  res.sendStatus(200);
 });
 
 app.get("/logout", (req, res) => {
   req.session.destroy((error) => {
     res.redirect("/");
-  })
+  });
 });
 
 app.get("/painting-know", (req, res) => {
