@@ -17,7 +17,7 @@ const firebaseConfig = {
   appId: "1:1027348099985:web:9e5a0eda2c76776e89a030",
   measurementId: "G-LCWJQD8GEF",
 };
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 5000;
 console.log("port", PORT);
 
 app
