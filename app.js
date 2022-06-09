@@ -20,16 +20,20 @@ const firebaseConfig = {
 const PORT = process.env.PORT || 5000;
 console.log("port", PORT);
 
-app
-  .use(express.static(path.join(__dirname, 'public')))
-  .use(express.static("public"))
-  .use(express.urlencoded({ extended: false }))
-  .use(bodyParser.json())
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('top'))
-  .get('/cool', (req, res) => res.send(cool()))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+// app
+//   .use(express.static(path.join(__dirname, 'public')))
+//   .use(express.static("public"))
+//   .use(express.urlencoded({ extended: false }))
+//   .use(bodyParser.json())
+//   .set('views', path.join(__dirname, 'views'))
+//   .set('view engine', 'ejs')
+//   .get('/', (req, res) => res.render('top'))
+//   .get('/cool', (req, res) => res.send(cool()))
+  
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+  
 
 app.use(
   session({
@@ -256,3 +260,5 @@ app.get("/ukuraina-know", (req, res) => {
 app.get("/rossia-know", (req, res) => {
   res.render("rossia-know.ejs");
 });
+
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
