@@ -21,12 +21,12 @@ const PORT = process.env.PORT || 5000;
 console.log("port", PORT);
 
 app
-  .use(express.static(path.join(__dirname, 'public')))
+  // .use(express.static(path.join(__dirname, 'public')))
   .use(express.static("public"))
   .use(express.urlencoded({ extended: false }))
   .use(bodyParser.json())
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
+  // .set('views', path.join(__dirname, 'views'))
+  // .set('view engine', 'ejs')
   // .get('/', (req, res) => res.render('top'))
   
 
