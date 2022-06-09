@@ -27,7 +27,7 @@
     "npm": "8.x"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": "",
   "keywords": [
     "heroku"
