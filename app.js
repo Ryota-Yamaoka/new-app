@@ -17,19 +17,18 @@ const firebaseConfig = {
   appId: "1:1027348099985:web:9e5a0eda2c76776e89a030",
   measurementId: "G-LCWJQD8GEF",
 };
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3001;
 console.log("port", PORT);
 
 app
-  // .use(express.static(path.join(__dirname, 'public')))
+  .use(express.static(path.join(__dirname, 'public')))
   .use(express.static("public"))
   .use(express.urlencoded({ extended: false }))
   .use(bodyParser.json())
-  // .set('views', path.join(__dirname, 'views'))
-  // .set('view engine', 'ejs')
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
   // .get('/', (req, res) => res.render('top'))
-  // .get('/cool', (req, res) => res.send(cool()))
-  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+  
 
 app.use(
   session({
@@ -83,6 +82,11 @@ app.get("/logout", (req, res) => {
 
 app.get("/painting-know", (req, res) => {
   res.render("painting-know.ejs");
+  // if(req.session.isLoggedIn === true){
+  //   ...
+  // }else{
+  //   ...
+  // }
 });
 
 app.get("/painting-comment", (req, res) => {
@@ -256,3 +260,5 @@ app.get("/ukuraina-know", (req, res) => {
 app.get("/rossia-know", (req, res) => {
   res.render("rossia-know.ejs");
 });
+
+app.listen(PORT, () => console.log(`Listening on ${ PORT }`));
