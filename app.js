@@ -21,14 +21,14 @@ const PORT = process.env.PORT || 5000;
 console.log("port", PORT);
 
 app
-  .use(express.static(path.join(__dirname, 'public')))
+  // .use(express.static(path.join(__dirname, 'public')))
   .use(express.static("public"))
   .use(express.urlencoded({ extended: false }))
   .use(bodyParser.json())
-  .set('views', path.join(__dirname, 'views'))
-  .set('view engine', 'ejs')
-  .get('/', (req, res) => res.render('top'))
-  .get('/cool', (req, res) => res.send(cool()))
+  // .set('views', path.join(__dirname, 'views'))
+  // .set('view engine', 'ejs')
+  // .get('/', (req, res) => res.render('top'))
+  // .get('/cool', (req, res) => res.send(cool()))
   .listen(PORT, () => console.log(`Listening on ${ PORT }`));
 
 app.use(
