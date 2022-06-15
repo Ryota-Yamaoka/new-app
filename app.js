@@ -9,16 +9,36 @@ const cool = require('cool-ascii-faces');
 require("dotenv").config();
 const bodyParser = require("body-parser");
 const firebaseConfig = {
-  apiKey: "AIzaSyAxetUkclvXWGL9ZvYKoGfnxWbtAmYcHg0",
-  authDomain: "t0cre8.firebaseapp.com",
-  projectId: "t0cre8",
-  storageBucket: "t0cre8.appspot.com",
-  messagingSenderId: "1027348099985",
-  appId: "1:1027348099985:web:9e5a0eda2c76776e89a030",
-  measurementId: "G-LCWJQD8GEF",
+  apiKey: "x",
+  authDomain: "x",
+  projectId: "x",
+  storageBucket: "x",
+  messagingSenderId: "x",
+  appId: "x",
+  measurementId: "x",
 };
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 console.log("port", PORT);
+
+const pgp = require("pg-promise")(/* options */);
+const connection = {
+  host: "localhost",
+  port: 5432,
+  database: "tocre",
+  user: "postgres",
+  password: "",
+};
+const db = pgp(connection);
+
+app.get('/users/:userId', (req, res) => {
+  db.one("SELECT * FROM users WHERE id=$1", [req.params.userId])
+  .then((data) => {
+    res.send(data);
+  })
+  .catch((error) => {
+    console.log("ERROR:", error);
+  });
+})
 
 app
   // .use(express.static(path.join(__dirname, 'public')))
